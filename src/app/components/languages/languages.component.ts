@@ -2,7 +2,6 @@
  * Copyleft Thomas Hansen - thomas@servergardens.com
  */
 
-import { throwError } from 'rxjs';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GridComponent } from '../../base/grid.component';
@@ -117,7 +116,8 @@ export class LanguagesComponent extends GridComponent implements OnInit {
   public editEntity(entity: any) {
 
     const dialogRef = this.dialog.open(EditLanguagesComponent, {
-      data: this.getEditData(entity)
+      data: this.getEditData(entity),
+      width: '450px'
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
