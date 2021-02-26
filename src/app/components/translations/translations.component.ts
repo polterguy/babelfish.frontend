@@ -31,6 +31,7 @@ export class TranslationsComponent extends GridComponent implements OnInit {
    */
   public displayedColumns: string[] = [
     'content',
+    'locale',
     'delete-instance'
   ];
 
