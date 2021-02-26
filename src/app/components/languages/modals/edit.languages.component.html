@@ -1,0 +1,46 @@
+
+<h1 mat-dialog-title>{{data.isEdit ? 'Edit' : 'Create'}} Languages</h1>
+<div mat-dialog-content>
+
+  <mat-form-field
+    *ngIf="canEditColumn('locale')"
+    class="entity-edit-field">
+    <input
+      matInput
+      type="text"
+      placeholder="locale"
+      (change)="changed('locale')"
+      [(ngModel)]="data.entity.locale"
+      autocomplete="off">
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('language')"
+    class="entity-edit-field">
+    <input
+      matInput
+      type="text"
+      placeholder="language"
+      (change)="changed('language')"
+      [(ngModel)]="data.entity.language"
+      autocomplete="off">
+  </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions>
+
+  <div class="right-aligned">
+
+    <button 
+      mat-raised-button
+      color="primary"
+      (click)="upsert()">Save</button>
+
+    <button
+      mat-button
+      (click)="close(null)">Cancel</button>
+
+  </div>
+
+</div>
