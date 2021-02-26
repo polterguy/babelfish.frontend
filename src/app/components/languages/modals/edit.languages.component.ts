@@ -2,7 +2,6 @@
  * Copyleft Thomas Hansen - thomas@servergardens.com
  */
 
-import { throwError } from 'rxjs';
 import { Component, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';

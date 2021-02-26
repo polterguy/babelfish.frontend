@@ -2,7 +2,6 @@
  * Copyleft Thomas Hansen - thomas@servergardens.com
  */
 
-import { throwError } from 'rxjs';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GridComponent } from '../../base/grid.component';
