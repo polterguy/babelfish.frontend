@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpService } from 'src/app/services/http-service';
 import { DialogComponent, DialogData } from '../../../base/dialog.component';
+import { SessionStateService } from 'src/app/services/session-state-service';
 
 /**
  * Modal dialog for editing your existing Translations entity types, and/or
@@ -24,6 +25,7 @@ export class EditTranslationsComponent extends DialogComponent {
   constructor(
     public dialogRef: MatDialogRef<EditTranslationsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    public sessionStateService: SessionStateService,
     protected snackBar: MatSnackBar,
     private service: HttpService) {
     super(snackBar);
@@ -54,10 +56,14 @@ export class EditTranslationsComponent extends DialogComponent {
   protected getUpdateMethod() {
     return this.service.translations.update(this.data.entity);
   }
+
   /**
    * Returns a reference to the create method, to create new entities.
    */
   protected getCreateMethod() {
+
+    // This is a bit naive, but actually works.
+    this.data.entity.translate = this.sessionStateService.translate;
     return this.service.translations.create(this.data.entity);
   }
 

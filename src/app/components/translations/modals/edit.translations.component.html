@@ -41,6 +41,12 @@
 
   <div class="right-aligned">
 
+    <mat-checkbox
+      *ngIf="!data.isEdit"
+      class="entity-edit-field"
+      [(ngModel)]="sessionStateService.translate"
+      matTooltip="Translate item using Google Translate">Translate</mat-checkbox>
+
     <button 
       mat-raised-button
       color="primary"
