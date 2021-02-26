@@ -14,18 +14,14 @@
       autocomplete="off">
   </mat-form-field>
 
-  <mat-form-field
-    *ngIf="canEditColumn('locale')"
-    class="entity-edit-field">
-    <input
-      matInput
-      type="text"
-      placeholder="locale"
-      (change)="changed('locale')"
-      [(ngModel)]="data.entity.locale"
-      autocomplete="off">
-  </mat-form-field>
-
+  <app-selector
+    key="locale"
+    value="language"
+    [model]="data.entity"
+    [placeholder]="Choose a language"
+    [getItems]="service.languages.read({limit:-1})">
+  </app-selector>
+ 
   <mat-form-field
     *ngIf="canEditColumn('content')"
     class="entity-edit-field">
