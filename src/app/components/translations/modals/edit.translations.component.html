@@ -1,5 +1,5 @@
 
-<h1 mat-dialog-title>{{data.isEdit ? 'Edit' : 'Create'}} Translations</h1>
+<h1 mat-dialog-title>{{data.isEdit ? 'Edit' : 'Create'}} Translation</h1>
 <div mat-dialog-content>
 
   <app-selector
@@ -25,14 +25,13 @@
  
   <mat-form-field
     *ngIf="canEditColumn('content')"
-    class="entity-edit-field">
-    <input
+    class="entity-edit-field entity-edit-field-full-width">
+    <textarea
       matInput
-      type="text"
-      placeholder="content"
       (change)="changed('content')"
+      rows="5"
       [(ngModel)]="data.entity.content"
-      autocomplete="off">
+      placeholder="Content"></textarea>
   </mat-form-field>
 
 </div>
