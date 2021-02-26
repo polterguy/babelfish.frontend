@@ -2,6 +2,15 @@
 <h1 mat-dialog-title>{{data.isEdit ? 'Edit' : 'Create'}} Translations</h1>
 <div mat-dialog-content>
 
+  <app-selector
+    key="locale"
+    class="entity-edit-field"
+    value="language"
+    [model]="data.entity"
+    placeholder="Choose a language"
+    [getItems]="service.languages.read({limit:-1})">
+  </app-selector>
+
   <mat-form-field
     *ngIf="canEditColumn('id')"
     class="entity-edit-field">
@@ -13,14 +22,6 @@
       [(ngModel)]="data.entity.id"
       autocomplete="off">
   </mat-form-field>
-
-  <app-selector
-    key="locale"
-    value="language"
-    [model]="data.entity"
-    placeholder="Choose a language"
-    [getItems]="service.languages.read({limit:-1})">
-  </app-selector>
  
   <mat-form-field
     *ngIf="canEditColumn('content')"
@@ -43,6 +44,7 @@
     <button 
       mat-raised-button
       color="primary"
+      [disabled]="!isValid()"
       (click)="upsert()">Save</button>
 
     <button

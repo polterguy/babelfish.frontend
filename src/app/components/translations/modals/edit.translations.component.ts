@@ -74,4 +74,11 @@ export class EditTranslationsComponent extends DialogComponent {
       this.dialogRef.close();
     }
   }
+
+  /**
+   * Returns true it entity is valid and can be saved.
+   */
+  public isValid() {
+    return this.data.entity.locale && this.data.entity.id && this.data.entity.content;
+  }
 }
