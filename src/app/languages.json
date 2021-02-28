@@ -183,8 +183,23 @@
   },
   {
     "code": "en",
-    "name": "English",
-    "native": "English"
+    "name": "English Universal",
+    "native": "English Universal"
+  },
+  {
+    "code": "en-US",
+    "name": "English United States",
+    "native": "English United Stated"
+  },
+  {
+    "code": "en-GB",
+    "name": "English Great Britain",
+    "native": "English Great Britain"
+  },
+  {
+    "code": "en-AU",
+    "name": "English Australian",
+    "native": "English Australian"
   },
   {
     "code": "eo",

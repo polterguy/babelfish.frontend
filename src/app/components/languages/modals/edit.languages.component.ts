@@ -69,6 +69,16 @@ export class EditLanguagesComponent extends DialogComponent implements OnInit {
 
     // Creating filter backends form control.
     this.languageControl = new FormControl();
+    if (this.data.isEdit) {
+      this.languageControl.setValue(this.data.entity.language);
+    } else {
+      this.languageControl.setValue('');
+    }
+
+    // Making sure we trap value changes for language form control, to make entity field dirty.
+    this.languageControl.valueChanges.subscribe(res => {
+      this.changed('language');
+    });
 
     // Retrieving currently existsing languages such that we can remove these as options.
     this.service.languages.read({limit: -1}).subscribe(res => {
@@ -80,8 +90,9 @@ export class EditLanguagesComponent extends DialogComponent implements OnInit {
       .pipe(
         startWith(''),
         map(value => 
+          !this.data.isEdit &&
           this.allLanguages.filter(x => this.existingLanguages.filter(y => y.locale === x.code).length === 0 &&
-          x.name.toLowerCase().includes(value.toLowerCase()))));
+          x.name.toLowerCase().includes(this.languageControl.value.toLowerCase()))));
   }
 
   /**
@@ -103,6 +114,7 @@ export class EditLanguagesComponent extends DialogComponent implements OnInit {
    * into component during creation.
    */
   protected getData() {
+    this.data.entity.language = this.languageControl.value;
     return this.data;
   }
   
