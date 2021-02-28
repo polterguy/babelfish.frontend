@@ -117,7 +117,7 @@ export class LanguagesComponent extends GridComponent implements OnInit {
 
     const dialogRef = this.dialog.open(EditLanguagesComponent, {
       data: this.getEditData(entity),
-      width: '150px'
+      width: '450px'
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res) {

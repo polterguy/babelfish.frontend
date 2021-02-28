@@ -3,6 +3,25 @@
 <div mat-dialog-content>
 
   <mat-form-field
+    *ngIf="canEditColumn('language')"
+    class="entity-edit-field entity-edit-field-full-width">
+    <mat-label>Language</mat-label>
+    <input
+      type="text"
+      placeholder="Language ..."
+      matInput
+      [formControl]="languageControl"
+      [matAutocomplete]="auto">
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="languageSelected()">
+      <mat-option *ngFor="let idx of filteredLanguages | async" [value]="idx.name">
+        {{idx.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field
     *ngIf="canEditColumn('locale')"
     class="entity-edit-field entity-edit-field-full-width">
     <input
@@ -11,18 +30,6 @@
       placeholder="locale"
       (change)="changed('locale')"
       [(ngModel)]="data.entity.locale"
-      autocomplete="off">
-  </mat-form-field>
-
-  <mat-form-field
-    *ngIf="canEditColumn('language')"
-    class="entity-edit-field entity-edit-field-full-width">
-    <input
-      matInput
-      type="text"
-      placeholder="language"
-      (change)="changed('language')"
-      [(ngModel)]="data.entity.language"
       autocomplete="off">
   </mat-form-field>
 
