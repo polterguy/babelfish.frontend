@@ -3,15 +3,15 @@
  */
 
 import { Injectable } from '@angular/core';
+import { ILog } from './interfaces/log-interface';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { ICrudEntity, ICrdEntity, ICrEntity, IREntity, IRdEntity } from './interfaces/crud-interfaces'
-import { ILog } from './interfaces/log-interface'
-import { StatusResponse } from './models/status-response';
-import { CreateResponse } from './models/create-response';
 import { CountResponse } from './models/count-response';
 import { UpdateResponse } from './models/update-response';
 import { DeleteResponse } from './models/delete-response';
+import { StatusResponse } from './models/status-response';
+import { CreateResponse } from './models/create-response';
+import { ICrudEntity } from './interfaces/crud-interfaces';
+import { environment } from 'src/environments/environment';
 
 /**
  * Your main HTTP service for invoking CRUD methods in your backend.

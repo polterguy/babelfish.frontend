@@ -24,7 +24,7 @@
             <mat-label>id</mat-label>
             <input
               matInput
-              placeholder="Filter ..."
+              placeholder="Filter by id ..."
               type="text"
               autocomplete="off"
               [formControl]="id">
@@ -42,15 +42,18 @@
 
       <ng-container matColumnDef="locale">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field appearance="outline" class="fill-width filter-textbox">
-            <mat-label>locale</mat-label>
-            <input
-              matInput
-              placeholder="Filter ..."
-              type="text"
-              autocomplete="off"
-              [formControl]="locale">
-            <mat-icon matSuffix>search</mat-icon>
+          <mat-form-field
+            *ngIf="languages.length > 0"
+            appearance="outline"
+            class="fill-width filter-select">
+            <mat-select
+              [(ngModel)]="filter['locale.eq']"
+              (selectionChange)="getData()"
+              placeholder="Filter by language ...">
+              <mat-option
+                *ngFor="let idx of languages"
+                [value]="idx.locale">{{idx.language}}</mat-option>
+            </mat-select>
           </mat-form-field>
           <button
             class="sort-button"
@@ -68,7 +71,7 @@
             <mat-label>content</mat-label>
             <input
               matInput
-              placeholder="Filter ..."
+              placeholder="Filter by content ..."
               type="text"
               autocomplete="off"
               [formControl]="content">
@@ -109,7 +112,7 @@
           *matCellDef="let el"
           colspan="4">
           <div
-            class="details-sheet"
+            class="details-sheet details-sheet-full-width"
             *ngIf="shouldDisplayDetails(el)">
             <button
               *ngIf="authService.me.canInvoke('magic/modules/babelfish/translations', 'put')"
@@ -119,9 +122,9 @@
               (click)="editEntity(el)">
               <mat-icon matSuffix>edit</mat-icon>
             </button>
-            <p class="details"><label>id</label><span>{{el.id}}</span></p>
-            <p class="details"><label>locale</label><span>{{el.locale}}</span></p>
-            <p class="details"><label>content</label><span>{{el.content}}</span></p>
+            <p class="language"><span>{{el.locale}}</span></p>
+            <p class="details header"><span>{{el.id}}</span></p>
+            <p class="details details-pre"><span>{{el.content}}</span></p>
           </div>
         </td>
       </ng-container>

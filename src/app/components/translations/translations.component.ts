@@ -25,12 +25,17 @@ import { AuthService } from 'src/app/services/auth-service';
 export class TranslationsComponent extends GridComponent implements OnInit {
 
   /**
+   * All languages backend supports.
+   */
+  public languages: any[] = [];
+
+  /**
    * Which columns we should display. Reorder to prioritize columns differently.
    * Notice! 'delete-instance' should always come last.
    */
   public displayedColumns: string[] = [
-    'id',
     'locale',
+    'id',
     'content',
     'delete-instance'
   ];
@@ -65,6 +70,12 @@ export class TranslationsComponent extends GridComponent implements OnInit {
    * necessary to actually retrieve items from backend.
    */
   protected read(filter: any) {
+    if (filter['id.like'] && filter['id.like'].length > 0) {
+      filter['id.like'] = '%' + filter['id.like'];
+    }
+    if (filter['content.like'] && filter['content.like'].length > 0) {
+      filter['content.like'] = '%' + filter['content.like'];
+    }
     return this.httpService.translations.read(filter);
   }
 
@@ -109,6 +120,19 @@ export class TranslationsComponent extends GridComponent implements OnInit {
     this.id = this.createFormControl('id.like');
     this.locale = this.createFormControl('locale.like');
     this.content = this.createFormControl('content.like');
+
+    /*
+     * Retrieving all supported languages from backend to populate
+     * locale filtering select drop down.
+     */
+    this.httpService.languages.read({limit:-1}).subscribe((res) => {
+
+      // Creating a default value for our filter.
+      this.filter['locale.eq'] = null;
+
+      // Assigning model to result from backend.
+      this.languages = [{locale: null, 'language': 'No filter ...'}].concat(res);
+    });
   }
 
   /**

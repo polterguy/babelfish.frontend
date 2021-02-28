@@ -8,7 +8,7 @@
     class="entity-edit-field"
     value="language"
     [model]="data.entity"
-    placeholder="Choose a language"
+    placeholder="Choose a language ..."
     [getItems]="service.languages.read({limit:-1})">
   </app-selector>
 
@@ -18,7 +18,7 @@
     <input
       matInput
       type="text"
-      placeholder="id"
+      placeholder="id ..."
       (change)="changed('id')"
       [(ngModel)]="data.entity.id"
       autocomplete="off">
@@ -26,13 +26,15 @@
  
   <mat-form-field
     *ngIf="canEditColumn('content')"
+    appearance="outline"
     class="entity-edit-field entity-edit-field-full-width">
     <textarea
       matInput
+      spellcheck="false"
       (change)="changed('content')"
       rows="5"
       [(ngModel)]="data.entity.content"
-      placeholder="Content"></textarea>
+      placeholder="Content ..."></textarea>
   </mat-form-field>
 
 </div>
