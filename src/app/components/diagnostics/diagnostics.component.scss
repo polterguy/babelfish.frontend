@@ -1,0 +1,36 @@
+/*
+ * Copyleft Thomas Hansen - thomas@servergardens.com
+ */
+
+.info-card {
+  margin:2rem 5rem 2rem 5rem;
+  padding: 3rem;
+  margin-top: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  .statistics-wrapper {
+    display: flex;
+    width: 100%;
+    canvas {
+      flex: 1;
+      width: 50% !important;
+      height: 50% !important;
+    }
+    div {
+      margin-left: 1rem;
+      flex: 1;
+      width: calc(50% - 1rem);
+      strong {
+        display: block;
+        text-align: center;
+      }
+      ul {
+        padding-left: 0;
+        li {
+          list-style-type: none;
+        }
+      }
+    }
+  }
+}

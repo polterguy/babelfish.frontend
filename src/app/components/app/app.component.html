@@ -69,6 +69,18 @@
       <span class="menu-item-text">Translations</span>
     </a>
 
+    <a
+      *ngIf="authService.me.canInvoke('magic/modules/babelfish/diagnostics', 'get')"
+      mat-button
+      routerLink="/diagnostics"
+      routerLinkActive="active-link"
+      class="menu-item"
+      (click)="closeNavigator()"
+      [routerLinkActiveOptions]="{exact:true}">
+      <mat-icon matSuffix>grade</mat-icon>
+      <span class="menu-item-text">Diagnostics</span>
+    </a>
+
   </mat-sidenav>
 
   <mat-sidenav-content class="sidenav-content">

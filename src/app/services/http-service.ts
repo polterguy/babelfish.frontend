@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { ILog } from './interfaces/log-interface';
 import { HttpClient } from '@angular/common/http';
 import { CountResponse } from './models/count-response';
+import { Diagnostics } from './models/diagnostics.model';
 import { UpdateResponse } from './models/update-response';
 import { DeleteResponse } from './models/delete-response';
 import { StatusResponse } from './models/status-response';
@@ -186,6 +187,16 @@ export class HttpService {
           args);
       }
     }
+  }
+
+  /**
+   * Returns number of translation entities grouped by locale, allowing
+   * you to see how many items exists in each language more easily.
+   */
+  diagnostics() {
+    return this.httpClient.get<Diagnostics[]>(
+      environment.apiUrl +
+      'magic/modules/babelfish/diagnostics');
   }
 
 
