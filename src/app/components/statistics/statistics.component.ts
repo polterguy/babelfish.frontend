@@ -25,9 +25,14 @@ export class StatisticsComponent implements OnInit {
   public max = 0;
 
   /**
-   * Total nbumber of translation entities in all languages.
+   * Total number of translation entities in all languages.
    */
   public total = 0;
+
+  /**
+   * Total number of failed translations in the database.
+   */
+  public totalFailures = 0;
 
   /**
    * Total number of languages.
@@ -128,7 +133,9 @@ export class StatisticsComponent implements OnInit {
 
     // Retrieving count of failed items, grouped by locale.
     this.httpService.failedTranslations().subscribe((res: TranslationCount[]) => {
-      console.log(res);
+
+      // Assigning result to model.
+      this.totalFailures = res.length;
     });
   }
 }

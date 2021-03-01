@@ -16,10 +16,17 @@
     </div>
 
     <div class="meta-statistics">
-      <strong>Translations</strong>
       <ul>
         <li *ngFor="let idx of items">
-          {{idx.locale}} - {{idx.count}} {{idx.count < max ? ' - ' + (max - idx.count) + ' missing items' : ''}}
+          <strong>
+            {{idx.locale}}
+          </strong>
+          <strong>
+            {{idx.count}}
+          </strong>
+          <strong *ngIf="idx.count < max">
+            {{max - idx.count}} missing
+          </strong>
         </li>
       </ul>
     </div>
@@ -27,7 +34,11 @@
   </div>
   <div>
     <p>
-      Total translation items in your database are {{total}}, and you are missing {{totalMissing}} items in all languages combined.
+      Total translation items in your database are {{total}}, and you are
+      missing {{totalMissing}} items in all languages combined.
+      <span *ngIf="totalFailures > 0">
+        There are also {{totalFailures}} translations that seems to be wrong.
+      </span>
     </p>
   </div>
 
