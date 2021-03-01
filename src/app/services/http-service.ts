@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { ILog } from './interfaces/log-interface';
 import { HttpClient } from '@angular/common/http';
 import { CountResponse } from './models/count-response';
-import { Diagnostics } from './models/diagnostics.model';
+import { TranslationCount } from './models/translation-count.model';
 import { UpdateResponse } from './models/update-response';
 import { DeleteResponse } from './models/delete-response';
 import { StatusResponse } from './models/status-response';
@@ -193,10 +193,20 @@ export class HttpService {
    * Returns number of translation entities grouped by locale, allowing
    * you to see how many items exists in each language more easily.
    */
-  diagnostics() {
-    return this.httpClient.get<Diagnostics[]>(
+  statistics() {
+    return this.httpClient.get<TranslationCount[]>(
       environment.apiUrl +
-      'magic/modules/babelfish/diagnostics');
+      'magic/modules/babelfish/statistics');
+  }
+
+  /**
+   * Returns number of translation entities grouped by locale, that for some
+   * reasons failed when trying to automatically translate them using Google Translate.
+   */
+  failedTranslations() {
+    return this.httpClient.get<TranslationCount[]>(
+      environment.apiUrl +
+      'magic/modules/babelfish/failed-translations');
   }
 
 

@@ -6,22 +6,43 @@ import { ChartOptions } from 'chart.js';
 import { Label, SingleDataSet } from 'ng2-charts';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http-service';
-import { Diagnostics } from 'src/app/services/models/diagnostics.model';
+import { TranslationCount } from 'src/app/services/models/translation-count.model';
 
 /**
  * Diagnostics component allowing user to see missing translation entities, etc.
  */
 @Component({
-  selector: 'app-diagnostics',
-  templateUrl: './diagnostics.component.html',
-  styleUrls: ['./diagnostics.component.scss']
+  selector: 'app-statistics',
+  templateUrl: './statistics.component.html',
+  styleUrls: ['./statistics.component.scss']
 })
-export class DiagnosticsComponent implements OnInit {
+export class StatisticsComponent implements OnInit {
+
+  /**
+   * Maximum number of translated entities according to language,
+   * allowing us to see missing translation entities for specific languages.
+   */
+  public max = 0;
+
+  /**
+   * Total nbumber of translation entities in all languages.
+   */
+  public total = 0;
+
+  /**
+   * Total number of languages.
+   */
+  public languageCount = 0;
+
+  /**
+   * Total number of missing items for all languages.
+   */
+  public totalMissing = 0;
 
   /**
    * Data model to display in HTML for list of translations.
    */
-  public items: Diagnostics[] = [];
+  public items: TranslationCount[] = [];
 
   /**
    * Options for log items per day bar chart.
@@ -68,36 +89,46 @@ export class DiagnosticsComponent implements OnInit {
    * Implementation of OnInit.
    */
   public ngOnInit() {
-    this.httpService.diagnostics().subscribe((res: Diagnostics[]) => {
 
-      // Finding maximum number of translations.
-      let max = 0;
+    // Retrieving statistics data from backend.
+    this.httpService.statistics().subscribe((res: TranslationCount[]) => {
+
+      // Finding maximum number of translations and total number of translations.
       for (const idx of res) {
-        if (idx.count > max) {
-          max = idx.count;
+        if (idx.count > this.max) {
+          this.max = idx.count;
         }
+        this.total += idx.count;
+      }
+
+      // Calculating total number of missing items.
+      for (const idx of res) {
+        this.total += idx.count;
+        this.totalMissing += this.max - idx.count;
       }
 
       // Assigning statistics data to result from server.
       this.statistics = res.map(x => x.count);
       this.statisticsLabels = res.map(x => {
-        if (x.count < max) {
-          return `${x.locale} - ${max - x.count} missing`
-        }
         return x.locale;
       });
 
       // Assigning color to bars, according to whether or not they're probably missing items or not.
       this.statisticsColors[0].backgroundColor = res.map(x => {
-        if (x.count < max) {
-          return 'rgb(255,200,200)';
+        if (x.count < this.max) {
+          return 'rgb(225,200,200)';
         } else {
-          return 'rgb(200,200,200)';
+          return 'rgb(200,225,200)';
         }
       });
 
       // Assigning result from server to data model.
       this.items = res;
+    });
+
+    // Retrieving count of failed items, grouped by locale.
+    this.httpService.failedTranslations().subscribe((res: TranslationCount[]) => {
+      console.log(res);
     });
   }
 }

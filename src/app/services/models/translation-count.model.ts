@@ -2,7 +2,7 @@
 /**
  * Model for counting translation entities grouped by locale.
  */
-export class Diagnostics {
+export class TranslationCount {
 
   /**
    * Locale, e.g. 'en', 'it', 'de', 'no', etc.

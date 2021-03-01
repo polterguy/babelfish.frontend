@@ -12,13 +12,8 @@
   .statistics-wrapper {
     display: flex;
     width: 100%;
-    canvas {
-      flex: 1;
-      width: 50% !important;
-      height: 50% !important;
-    }
-    div {
-      margin-left: 1rem;
+    .meta-statistics {
+      margin-right: 1rem;
       flex: 1;
       width: calc(50% - 1rem);
       strong {

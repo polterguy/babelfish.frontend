@@ -70,15 +70,15 @@
     </a>
 
     <a
-      *ngIf="authService.me.canInvoke('magic/modules/babelfish/diagnostics', 'get')"
+      *ngIf="authService.me.canInvoke('magic/modules/babelfish/statistics', 'get')"
       mat-button
-      routerLink="/diagnostics"
+      routerLink="/statistics"
       routerLinkActive="active-link"
       class="menu-item"
       (click)="closeNavigator()"
       [routerLinkActiveOptions]="{exact:true}">
       <mat-icon matSuffix>grade</mat-icon>
-      <span class="menu-item-text">Diagnostics</span>
+      <span class="menu-item-text">Statistics</span>
     </a>
 
   </mat-sidenav>

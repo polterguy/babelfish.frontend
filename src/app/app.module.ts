@@ -46,7 +46,7 @@ import { SelectorComponent } from './helpers/selector/selector.component';
 
 // Generated CRUD components here.
 import { LanguagesComponent } from './components/languages/languages.component';
-import { DiagnosticsComponent } from './components/diagnostics/diagnostics.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 import { TranslationsComponent } from './components/translations/translations.component';
 import { EditLanguagesComponent } from './components/languages/modals/edit.languages.component';
 import { EditTranslationsComponent } from './components/translations/modals/edit.translations.component';
@@ -66,7 +66,7 @@ import { EditTranslationsComponent } from './components/translations/modals/edit
     EditLanguagesComponent,
     TranslationsComponent,
     EditTranslationsComponent,
-    DiagnosticsComponent,
+    StatisticsComponent,
   ],
   imports: [
     OwlDateTimeModule,

@@ -1,0 +1,34 @@
+
+<mat-card class="info-card">
+
+  <div class="statistics-wrapper">
+
+    <div class="meta-statistics">
+      <canvas
+        *ngIf="statistics"
+        baseChart
+        chartType="bar"
+        [data]="statistics" 
+        [labels]="statisticsLabels" 
+        [options]="chartOptions"
+        [colors]="statisticsColors">
+      </canvas>
+    </div>
+
+    <div class="meta-statistics">
+      <strong>Translations</strong>
+      <ul>
+        <li *ngFor="let idx of items">
+          {{idx.locale}} - {{idx.count}} {{idx.count < max ? ' - ' + (max - idx.count) + ' missing items' : ''}}
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <div>
+    <p>
+      Total translation items in your database are {{total}}, and you are missing {{totalMissing}} items in all languages combined.
+    </p>
+  </div>
+
+</mat-card>
