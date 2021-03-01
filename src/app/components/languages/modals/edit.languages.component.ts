@@ -82,7 +82,7 @@ export class EditLanguagesComponent extends DialogComponent implements OnInit {
 
     // Retrieving currently existsing languages such that we can remove these as options.
     this.service.languages.read({limit: -1}).subscribe(res => {
-      this.existingLanguages = res;
+      this.existingLanguages = res || [];
     });
 
     // Creating our filter languages subscriber for our auto completer.

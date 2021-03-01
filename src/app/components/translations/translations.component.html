@@ -52,7 +52,7 @@
               placeholder="Filter by language ...">
               <mat-option
                 *ngFor="let idx of languages"
-                [value]="idx.locale">{{idx.language}}</mat-option>
+                [value]="idx.locale">{{idx.language + (!idx.locale ? '' : ' - [' + idx.locale + ']')}}</mat-option>
             </mat-select>
           </mat-form-field>
           <button

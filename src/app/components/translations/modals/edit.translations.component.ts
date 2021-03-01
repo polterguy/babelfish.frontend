@@ -2,7 +2,7 @@
  * Copyleft Thomas Hansen - thomas@servergardens.com
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpService } from 'src/app/services/http-service';
@@ -17,7 +17,7 @@ import { SessionStateService } from 'src/app/services/session-state-service';
   templateUrl: './edit.translations.component.html',
   styleUrls: ['./edit.translations.component.scss']
 })
-export class EditTranslationsComponent extends DialogComponent {
+export class EditTranslationsComponent extends DialogComponent implements OnInit {
 
   /**
    * Constructor taking a bunch of services injected using dependency injection.
@@ -40,6 +40,21 @@ export class EditTranslationsComponent extends DialogComponent {
       'locale',
       'content'
     ];
+  }
+
+  /**
+   * Implementation of OnInit.
+   */
+  ngOnInit() {
+
+    // Defaulting language to English if English exists in database.
+    if (!this.data.isEdit) {
+      this.service.languages.read({limit:-1}).subscribe(res => {
+        if (res.filter(x => x.locale === 'en')) {
+          this.data.entity['locale'] = 'en';
+        }
+      })
+    }
   }
 
   /**

@@ -2,16 +2,15 @@
  * Copyleft Thomas Hansen - thomas@servergardens.com
  */
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GridComponent } from '../../base/grid.component';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
-import { FormControl } from '@angular/forms';
-
-import { EditTranslationsComponent } from './modals/edit.translations.component';
 import { HttpService } from 'src/app/services/http-service';
 import { AuthService } from 'src/app/services/auth-service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { EditTranslationsComponent } from './modals/edit.translations.component';
 
 /**
  * "Datagrid" component for displaying instance of Translations
@@ -131,7 +130,7 @@ export class TranslationsComponent extends GridComponent implements OnInit {
       this.filter['locale.eq'] = null;
 
       // Assigning model to result from backend.
-      this.languages = [{locale: null, 'language': 'No filter ...'}].concat(res);
+      this.languages = [{locale: null, 'language': 'No filter ...'}].concat(res || []);
     });
   }
 
@@ -143,6 +142,7 @@ export class TranslationsComponent extends GridComponent implements OnInit {
   public editEntity(entity: any) {
 
     const dialogRef = this.dialog.open(EditTranslationsComponent, {
+      width: '800px',
       data: this.getEditData(entity)
     });
     dialogRef.afterClosed().subscribe(res => {
@@ -161,6 +161,7 @@ export class TranslationsComponent extends GridComponent implements OnInit {
   public createEntity() {
 
     const dialogRef = this.dialog.open(EditTranslationsComponent, {
+      width: '800px',
       data: {
         isEdit: false,
         entity: {},

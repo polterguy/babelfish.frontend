@@ -2,16 +2,15 @@
  * Copyleft Thomas Hansen - thomas@servergardens.com
  */
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GridComponent } from '../../base/grid.component';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
-import { FormControl } from '@angular/forms';
-
-import { EditLanguagesComponent } from './modals/edit.languages.component';
 import { HttpService } from 'src/app/services/http-service';
 import { AuthService } from 'src/app/services/auth-service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { EditLanguagesComponent } from './modals/edit.languages.component';
 
 /**
  * "Datagrid" component for displaying instance of Languages
