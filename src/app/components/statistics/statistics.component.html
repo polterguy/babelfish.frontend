@@ -18,15 +18,15 @@
     <div class="meta-statistics">
       <ul>
         <li *ngFor="let idx of items">
-          <strong>
+          <span>
             {{idx.locale}}
-          </strong>
-          <strong>
+          </span>
+          <span>
             {{idx.count}}
-          </strong>
-          <strong *ngIf="idx.count < max">
+          </span>
+          <span *ngIf="idx.count < max">
             {{max - idx.count}} missing
-          </strong>
+          </span>
         </li>
       </ul>
     </div>

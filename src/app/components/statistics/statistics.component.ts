@@ -98,6 +98,9 @@ export class StatisticsComponent implements OnInit {
     // Retrieving statistics data from backend.
     this.httpService.statistics().subscribe((res: TranslationCount[]) => {
 
+      // Avoiding null reference exceptions.
+      res = res || [];
+
       // Finding maximum number of translations and total number of translations.
       for (const idx of res) {
         if (idx.count > this.max) {
@@ -135,7 +138,7 @@ export class StatisticsComponent implements OnInit {
     this.httpService.failedTranslations().subscribe((res: TranslationCount[]) => {
 
       // Assigning result to model.
-      this.totalFailures = res.length;
+      this.totalFailures = (res || []).length;
     });
   }
 }
