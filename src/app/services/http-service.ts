@@ -6,13 +6,13 @@ import { Injectable } from '@angular/core';
 import { ILog } from './interfaces/log-interface';
 import { HttpClient } from '@angular/common/http';
 import { CountResponse } from './models/count-response';
-import { TranslationCount } from './models/translation-count.model';
 import { UpdateResponse } from './models/update-response';
 import { DeleteResponse } from './models/delete-response';
 import { StatusResponse } from './models/status-response';
 import { CreateResponse } from './models/create-response';
 import { ICrudEntity } from './interfaces/crud-interfaces';
 import { environment } from 'src/environments/environment';
+import { TranslationCount } from './models/translation-count.model';
 
 /**
  * Your main HTTP service for invoking CRUD methods in your backend.
@@ -111,35 +111,35 @@ export class HttpService {
       delete: (filter: any) => {
         return this.httpClient.delete<DeleteResponse>(
           environment.apiUrl +
-          'magic/modules/babelfish/languages' +
+          'magic/modules/babelfish/admin/languages' +
           this.getQueryArgs(filter));
       },
 
       read: (filter: any) => {
         return this.httpClient.get<any[]>(
           environment.apiUrl +
-          'magic/modules/babelfish/languages' +
+          'magic/modules/babelfish/admin/languages' +
           this.getQueryArgs(filter));
       },
 
       count: (filter: any) => {
         return this.httpClient.get<CountResponse>(
           environment.apiUrl +
-          'magic/modules/babelfish/languages-count' +
+          'magic/modules/babelfish/admin/languages-count' +
           this.getQueryArgs(filter));
       },
 
       create: (args: any) => {
         return this.httpClient.post<CreateResponse>(
           environment.apiUrl +
-          'magic/modules/babelfish/languages',
+          'magic/modules/babelfish/admin/languages',
           args);
       },
 
       update: (args: any) => {
         return this.httpClient.put<UpdateResponse>(
           environment.apiUrl +
-          'magic/modules/babelfish/languages',
+          'magic/modules/babelfish/admin/languages',
           args);
       }
     }
@@ -155,35 +155,35 @@ export class HttpService {
       delete: (filter: any) => {
         return this.httpClient.delete<DeleteResponse>(
           environment.apiUrl +
-          'magic/modules/babelfish/translations' +
+          'magic/modules/babelfish/admin/translations' +
           this.getQueryArgs(filter));
       },
 
       read: (filter: any) => {
         return this.httpClient.get<any[]>(
           environment.apiUrl +
-          'magic/modules/babelfish/translations' +
+          'magic/modules/babelfish/admin/translations' +
           this.getQueryArgs(filter));
       },
 
       count: (filter: any) => {
         return this.httpClient.get<CountResponse>(
           environment.apiUrl +
-          'magic/modules/babelfish/translations-count' +
+          'magic/modules/babelfish/admin/translations-count' +
           this.getQueryArgs(filter));
       },
 
       create: (args: any) => {
         return this.httpClient.post<CreateResponse>(
           environment.apiUrl +
-          'magic/modules/babelfish/translations',
+          'magic/modules/babelfish/admin/translations',
           args);
       },
 
       update: (args: any) => {
         return this.httpClient.put<UpdateResponse>(
           environment.apiUrl +
-          'magic/modules/babelfish/translations',
+          'magic/modules/babelfish/admin/translations',
           args);
       }
     }
@@ -196,7 +196,7 @@ export class HttpService {
   statistics() {
     return this.httpClient.get<TranslationCount[]>(
       environment.apiUrl +
-      'magic/modules/babelfish/statistics');
+      'magic/modules/babelfish/admin/statistics');
   }
 
   /**
@@ -206,7 +206,7 @@ export class HttpService {
   failedTranslations() {
     return this.httpClient.get<TranslationCount[]>(
       environment.apiUrl +
-      'magic/modules/babelfish/failed-translations');
+      'magic/modules/babelfish/admin/failed-translations');
   }
 
 
