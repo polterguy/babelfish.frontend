@@ -7,7 +7,7 @@
 
     <button
       mat-raised-button
-      *ngIf="authService.me.canInvoke('magic/modules/babelfish/languages', 'post')"
+      *ngIf="authService.me.canInvoke('magic/modules/babelfish/admin/languages', 'post')"
       class="new-button"
       (click)="createEntity()">
       <mat-icon>add_circle</mat-icon>
@@ -66,12 +66,12 @@
         <th
           mat-header-cell
           *matHeaderCellDef
-          [ngClass]="authService.me.canInvoke('magic/modules/babelfish/languages', 'delete') ? 'delete-column' : 'hidden'"></th>
+          [ngClass]="authService.me.canInvoke('magic/modules/babelfish/admin/languages', 'delete') ? 'delete-column' : 'hidden'"></th>
 
         <td
           mat-cell
           *matCellDef="let el"
-          [ngClass]="authService.me.canInvoke('magic/modules/babelfish/languages', 'delete') ? 'delete-column' : 'hidden'">
+          [ngClass]="authService.me.canInvoke('magic/modules/babelfish/admin/languages', 'delete') ? 'delete-column' : 'hidden'">
           <button
             mat-button
             (click)="deleteEntity(el, {locale: el.locale})"
@@ -90,7 +90,7 @@
             class="details-sheet"
             *ngIf="shouldDisplayDetails(el)">
             <button
-              *ngIf="authService.me.canInvoke('magic/modules/babelfish/languages', 'put')"
+              *ngIf="authService.me.canInvoke('magic/modules/babelfish/admin/languages', 'put')"
               mat-button
               color="primary"
               class="edit-details"

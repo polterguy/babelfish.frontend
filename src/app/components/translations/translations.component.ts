@@ -61,7 +61,7 @@ export class TranslationsComponent extends GridComponent implements OnInit {
    * for CRUD methods to base class.
    */
   protected url() {
-    return 'magic/modules/babelfish/translations';
+    return 'magic/modules/babelfish/admin/translations';
   }
 
   /**

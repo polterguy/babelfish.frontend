@@ -47,7 +47,7 @@
       <span class="menu-item-text">Home</span>
     </a>
     <a
-      *ngIf="authService.me.canInvoke('magic/modules/babelfish/languages', 'get')"
+      *ngIf="authService.me.canInvoke('magic/modules/babelfish/admin/languages', 'get')"
       mat-button
       routerLink="/languages"
       routerLinkActive="active-link"
@@ -58,7 +58,7 @@
       <span class="menu-item-text">Languages</span>
     </a>
     <a
-      *ngIf="authService.me.canInvoke('magic/modules/babelfish/translations', 'get')"
+      *ngIf="authService.me.canInvoke('magic/modules/babelfish/admin/translations', 'get')"
       mat-button
       routerLink="/translations"
       routerLinkActive="active-link"
@@ -70,7 +70,7 @@
     </a>
 
     <a
-      *ngIf="authService.me.canInvoke('magic/modules/babelfish/statistics', 'get')"
+      *ngIf="authService.me.canInvoke('magic/modules/babelfish/admin/statistics', 'get')"
       mat-button
       routerLink="/statistics"
       routerLinkActive="active-link"
