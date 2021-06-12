@@ -8,7 +8,7 @@ Below is a screenshot illustrating typical usage.
 ![Screenshot](https://servergardens.files.wordpress.com/2021/06/babelfish-dashboard.png)
 
 To understand the purpose of the application, and see its documentation, please refer to
-its [backend counterparts](https://github.com/polterguy/babelfish)
+its [backend counterparts](https://github.com/polterguy/babelfish).
 
 ## License
 
