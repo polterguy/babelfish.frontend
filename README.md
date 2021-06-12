@@ -3,6 +3,7 @@
 
 An administrative frontend Angular app for your [Babelfish backend](https://github.com/polterguy/babelfish) to
 allow you to easily administrate your translation entities and supported languages in your enterprise apps.
+Below is a screenshot illustrating typical usage.
 
 ![Screenshot](https://servergardens.files.wordpress.com/2021/06/babelfish-dashboard.png)
 
