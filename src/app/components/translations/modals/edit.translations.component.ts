@@ -27,7 +27,7 @@ export class EditTranslationsComponent extends DialogComponent implements OnInit
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public sessionStateService: SessionStateService,
     protected snackBar: MatSnackBar,
-    private service: HttpService) {
+    public service: HttpService) {
     super(snackBar);
     this.primaryKeys = ['id', 'locale'];
     this.createColumns = [
