@@ -1,4 +1,4 @@
 {
-  "url": "http://api.ttcmapi.com/",
-  "api_domain": "api.ttcmapi.com"
+  "url": "http://localhost:55247/",
+  "api_domain": "localhost:55247"
 }
