@@ -104,7 +104,9 @@ export class AuthService {
           }
           this.httpClient.get<AuthenticateToken>(
             environment.apiUrl +
-            'magic/modules/system/auth/authenticate' + query).subscribe((res: any) => {
+            'magic/modules/system/auth/authenticate' + query, {
+              withCredentials: query === ''
+            }).subscribe((res: any) => {
     
               // Success.
               localStorage.setItem('jwt_token', res.ticket);
