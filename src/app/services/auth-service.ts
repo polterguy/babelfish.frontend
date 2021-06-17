@@ -2,18 +2,22 @@
  * Copyleft Thomas Hansen - thomas@servergardens.com
  */
 
-import { JwtHelperService } from '@auth0/angular-jwt';
+// Angular and system specific imports.
 import { Injectable } from '@angular/core';
+import { Endpoint } from './models/endpoint';
 import { Observable, Subscriber } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { Endpoint } from './models/endpoint';
-import { AuthenticateToken } from './models/authenticate-token';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+// Application specific imports.
 import { IMe } from './interfaces/me-interface';
+import { environment } from 'src/environments/environment';
+import { AuthenticateToken } from './models/authenticate-token';
+import { AutoAuthResponse } from './models/auto-auth-response';
 
 /**
  * Authentication and authorization service, allowing you to query your backend
- * for its users/roles/etc.
+ * for its users/roles, authenticating users, etc.
  */
 @Injectable({
   providedIn: 'root'
@@ -31,8 +35,7 @@ export class AuthService {
    */
   constructor(
     private httpClient: HttpClient,
-    private jwtHelper: JwtHelperService)
-  {
+    private jwtHelper: JwtHelperService) {
     this.initialize();
   }
 
@@ -43,6 +46,18 @@ export class AuthService {
    */
   public hasEndpoints() {
     return this.endpoints.length > 0;
+  }
+
+  /**
+   * Returns true if backend can automatically login user, without
+   * having the user provide a username/password combination.
+   */
+  public hasAutoLogin() {
+
+    // Invoking backend, returning observable to caller.
+    return this.httpClient.get<AutoAuthResponse>(
+      environment.apiUrl +
+      'magic/modules/system/auth/auto-auth');
   }
 
   /**
@@ -82,12 +97,14 @@ export class AuthService {
     
       authenticate: (username: string, password: string) => {
         return new Observable<any>((observer: Subscriber<AuthenticateToken>) => {
+          let query = '';
+          if (username && username !== '') {
+            query += '?username=' + encodeURIComponent(username);
+            query += '&password=' + encodeURIComponent(password);
+          }
           this.httpClient.get<AuthenticateToken>(
             environment.apiUrl +
-            'magic/modules/system/auth/authenticate?username=' +
-            encodeURI(username) +
-            '&password=' +
-            encodeURI(password)).subscribe((res: any) => {
+            'magic/modules/system/auth/authenticate' + query).subscribe((res: any) => {
     
               // Success.
               localStorage.setItem('jwt_token', res.ticket);

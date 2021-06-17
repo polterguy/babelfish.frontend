@@ -3,6 +3,7 @@
  */
 
 // Angular imports.
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -44,7 +45,8 @@ export class AppComponent {
     public authService: AuthService,
     private snackBar: MatSnackBar,
     public loaderService: LoaderService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private router: Router) { }
 
   /**
    * Attempts to login user, using the username/password combination he
@@ -85,6 +87,7 @@ export class AppComponent {
     this.messages.sendMessage({
       name: Messages.LOGGED_OUT,
     });
+    this.router.navigate(['/']);
   }
 
   /**

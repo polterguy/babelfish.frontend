@@ -3,7 +3,7 @@
 
 <div mat-dialog-content>
 
-  <mat-form-field class="fill-width">
+  <mat-form-field *ngIf="autoAuth === false || advanced === true" class="fill-width">
     <input 
       matInput 
       placeholder="Username"
@@ -12,7 +12,7 @@
       [(ngModel)]="username">
   </mat-form-field>
 
-  <mat-form-field class="fill-width">
+  <mat-form-field *ngIf="autoAuth === false || advanced === true" class="fill-width">
     <input 
       matInput 
       placeholder="Password"
@@ -22,14 +22,21 @@
   </mat-form-field>
 
   <div class="right-aligned">
+
+    <mat-checkbox
+      *ngIf="autoAuth === true"
+      [(ngModel)]="advanced">Advanced</mat-checkbox>
+
     <button 
       mat-button
       (click)="login()"
       matTooltip="Login to your app">Login</button>
+
     <button 
       mat-button
       (click)="close()"
       matTooltip="Close dialog">Cancel</button>
+
   </div>
 
 </div>
