@@ -1,14 +1,15 @@
-
 # Babelfish frontend dashboard
 
-An administrative frontend Angular app for your [Babelfish backend](https://github.com/polterguy/babelfish) to
+An administrative frontend for your Babelfish Micro Service module to
 allow you to easily administrate your translation entities and supported languages in your enterprise apps.
 Below is a screenshot illustrating typical usage.
 
-![Screenshot](https://servergardens.files.wordpress.com/2021/06/babelfish-dashboard.png)
+![Screenshot](https://servergardens.com/wp-content/uploads/2021/08/babelfish-screenshot.png)
 
-To understand the purpose of the application, and see its documentation, please refer to
-its [backend counterparts](https://github.com/polterguy/babelfish).
+## Usage
+
+To understand module, realise it's a frontend dashboard for
+ServerGardens' [Babel Fish Micro Service](https://servergardens.com/services/).
 
 ## License
 
