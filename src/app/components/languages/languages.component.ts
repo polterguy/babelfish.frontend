@@ -19,22 +19,17 @@ import { EditLanguagesComponent } from './modals/edit.languages.component';
 @Component({
   selector: 'app-languages',
   templateUrl: './languages.component.html',
-  styleUrls: ['./languages.component.scss']
+  styleUrls: ['./languages.component.scss'],
 })
 export class LanguagesComponent extends GridComponent implements OnInit {
-
   /**
    * Which columns we should display. Reorder to prioritize columns differently.
    * Notice! 'delete-instance' should always come last.
    */
-  public displayedColumns: string[] = [
-    'language',
-    'locale',
-    'delete-instance'
-  ];
+  public displayedColumns: string[] = ['language', 'locale', 'delete-instance'];
 
   // Need to view paginator as a child to update page index of it.
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   // Form control declarations to bind up with reactive form elements.
   public locale: FormControl;
@@ -45,8 +40,9 @@ export class LanguagesComponent extends GridComponent implements OnInit {
     public authService: AuthService,
     protected snackBar: MatSnackBar,
     private httpService: HttpService,
-    private dialog: MatDialog) {
-      super(authService, snackBar);
+    private dialog: MatDialog
+  ) {
+    super(authService, snackBar);
   }
 
   /**
@@ -95,7 +91,6 @@ export class LanguagesComponent extends GridComponent implements OnInit {
    * and instantiates our FormControls.
    */
   public ngOnInit() {
-
     // Retrieves data from our backend, unfiltered, and binds our mat-table accordingly.
     this.getData();
 
@@ -109,16 +104,15 @@ export class LanguagesComponent extends GridComponent implements OnInit {
 
   /**
    * Invoked when user wants to edit an entity
-   * 
+   *
    * This will show a modal dialog, allowing the user to edit his record.
    */
   public editEntity(entity: any) {
-
     const dialogRef = this.dialog.open(EditLanguagesComponent, {
       data: this.getEditData(entity),
-      width: '450px'
+      width: '450px',
     });
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.setEditData(res, entity);
       }
@@ -127,17 +121,17 @@ export class LanguagesComponent extends GridComponent implements OnInit {
 
   /**
    * Invoked when user wants to create a new entity
-   * 
+   *
    * This will show a modal dialog, allowing the user to supply
    * the initial data for the entity.
    */
   public createEntity() {
-
     const dialogRef = this.dialog.open(EditLanguagesComponent, {
       data: {
         isEdit: false,
         entity: {},
-      }});
+      },
+    });
     dialogRef.afterClosed().subscribe((res: any) => {
       if (res) {
         this.itemCreated(res);

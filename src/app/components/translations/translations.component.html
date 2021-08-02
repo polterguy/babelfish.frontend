@@ -1,43 +1,43 @@
-
 <div class="component-wrapper">
-
   <div class="mat-elevation-z4 relativized grid-wrapper">
-
-    <h2>Translations</h2>
-
     <button
       mat-raised-button
-      *ngIf="authService.me.canInvoke('magic/modules/babelfish/admin/translations', 'post')"
-      class="new-button"
-      (click)="createEntity()">
+      *ngIf="
+        authService.me.canInvoke(
+          'magic/modules/babelfish/admin/translations',
+          'post'
+        )
+      "
+      class="create-button"
+      (click)="createEntity()"
+    >
       <mat-icon>add_circle</mat-icon>
     </button>
 
-    <table
-      mat-table
-      multiTemplateDataRows
-      [dataSource]="data">
-
+    <table mat-table multiTemplateDataRows [dataSource]="data">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field appearance="outline" class="fill-width filter-textbox">
+          <mat-form-field
+            appearance="outline"
+            class="fill-width filter-textbox"
+          >
             <mat-label>id</mat-label>
             <input
               matInput
               placeholder="Filter by id ..."
               type="text"
               autocomplete="off"
-              [formControl]="id">
+              [formControl]="id"
+            />
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
-          <button
-            class="sort-button"
-            (click)="sort('id')"
-            mat-button>
-            <mat-icon matSuffix>{{getSortIcon('id')}}</mat-icon>
+          <button class="sort-button" (click)="sort('id')" mat-button>
+            <mat-icon matSuffix>{{ getSortIcon('id') }}</mat-icon>
           </button>
         </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.id}}</td>
+        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">
+          {{ el.id }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="locale">
@@ -45,113 +45,142 @@
           <mat-form-field
             *ngIf="languages.length > 0"
             appearance="outline"
-            class="fill-width filter-select">
+            class="fill-width filter-select"
+          >
             <mat-select
               [(ngModel)]="filter['locale.eq']"
               (selectionChange)="getData()"
-              placeholder="Filter by language ...">
-              <mat-option
-                *ngFor="let idx of languages"
-                [value]="idx.locale">{{idx.language + (!idx.locale ? '' : ' - [' + idx.locale + ']')}}</mat-option>
+              placeholder="Filter by language ..."
+            >
+              <mat-option *ngFor="let idx of languages" [value]="idx.locale">{{
+                idx.language + (!idx.locale ? '' : ' - [' + idx.locale + ']')
+              }}</mat-option>
             </mat-select>
           </mat-form-field>
-          <button
-            class="sort-button"
-            (click)="sort('locale')"
-            mat-button>
-            <mat-icon matSuffix>{{getSortIcon('locale')}}</mat-icon>
+          <button class="sort-button" (click)="sort('locale')" mat-button>
+            <mat-icon matSuffix>{{ getSortIcon('locale') }}</mat-icon>
           </button>
         </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.locale}}</td>
+        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">
+          {{ el.locale }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="content">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field appearance="outline" class="fill-width filter-textbox">
+          <mat-form-field
+            appearance="outline"
+            class="fill-width filter-textbox"
+          >
             <mat-label>content</mat-label>
             <input
               matInput
               placeholder="Filter by content ..."
               type="text"
               autocomplete="off"
-              [formControl]="content">
+              [formControl]="content"
+            />
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
-          <button
-            class="sort-button"
-            (click)="sort('content')"
-            mat-button>
-            <mat-icon matSuffix>{{getSortIcon('content')}}</mat-icon>
+          <button class="sort-button" (click)="sort('content')" mat-button>
+            <mat-icon matSuffix>{{ getSortIcon('content') }}</mat-icon>
           </button>
         </th>
-        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">{{el.content}}</td>
+        <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">
+          {{ el.content }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="delete-instance">
         <th
           mat-header-cell
           *matHeaderCellDef
-          [ngClass]="authService.me.canInvoke('magic/modules/babelfish/admin/translations', 'delete') ? 'delete-column' : 'hidden'"></th>
+          [ngClass]="
+            authService.me.canInvoke(
+              'magic/modules/babelfish/admin/translations',
+              'delete'
+            )
+              ? 'delete-column'
+              : 'hidden'
+          "
+        ></th>
 
         <td
           mat-cell
           *matCellDef="let el"
-          [ngClass]="authService.me.canInvoke('magic/modules/babelfish/admin/translations', 'delete') ? 'delete-column' : 'hidden'">
+          [ngClass]="
+            authService.me.canInvoke(
+              'magic/modules/babelfish/admin/translations',
+              'delete'
+            )
+              ? 'delete-column'
+              : 'hidden'
+          "
+        >
           <button
             mat-button
-            (click)="deleteEntity(el, {id: el.id, locale: el.locale})"
-            placeholder="Deletes this record">
+            (click)="deleteEntity(el, { id: el.id, locale: el.locale })"
+            placeholder="Deletes this record"
+          >
             <mat-icon matSuffix>delete</mat-icon>
           </button>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="details">
-        <td
-          mat-cell
-          *matCellDef="let el"
-          colspan="4">
+        <td mat-cell *matCellDef="let el" colspan="4">
           <div
             class="details-sheet details-sheet-full-width"
-            *ngIf="shouldDisplayDetails(el)">
+            *ngIf="shouldDisplayDetails(el)"
+          >
             <button
-              *ngIf="authService.me.canInvoke('magic/modules/babelfish/admin/translations', 'put')"
+              *ngIf="
+                authService.me.canInvoke(
+                  'magic/modules/babelfish/admin/translations',
+                  'put'
+                )
+              "
               mat-button
               color="primary"
-              class="edit-details"
-              (click)="editEntity(el)">
+              class="edit-button"
+              (click)="editEntity(el)"
+            >
               <mat-icon matSuffix>edit</mat-icon>
             </button>
-            <p class="language"><span>{{el.locale}}</span></p>
-            <p class="details header"><span>{{el.id}}</span></p>
-            <p class="details details-pre"><span>{{el.content}}</span></p>
+            <p class="language">
+              <span>{{ el.locale }}</span>
+            </p>
+            <p class="details header">
+              <span>{{ el.id }}</span>
+            </p>
+            <p class="details details-pre">
+              <span>{{ el.content }}</span>
+            </p>
           </div>
         </td>
       </ng-container>
 
-      <tr
-        mat-header-row
-        *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
       <tr
         mat-row
         [ngClass]="getClassForRecord(row)"
-        *matRowDef="let row; columns: displayedColumns;"></tr>
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
 
       <tr
         mat-row
         [ngClass]="getClassForDetails(row)"
-        *matRowDef="let row; columns: ['details']; "></tr>
-
+        *matRowDef="let row; columns: ['details']"
+      ></tr>
     </table>
     <mat-paginator
       #paginator
       [(length)]="itemsCount"
       [(pageSize)]="filter.limit"
       (page)="paged($event)"
-      [pageSizeOptions]="[5,10,25,50, 100, 250]">
+      [pageSizeOptions]="[5, 10, 25, 50, 100, 250]"
+    >
     </mat-paginator>
-
   </div>
-
 </div>

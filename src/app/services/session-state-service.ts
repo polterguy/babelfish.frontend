@@ -3,19 +3,19 @@
  */
 
 // Angular system imports.
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 /**
  * Session state service, giving some mechanism to remember choices across
  * multiple component instantiations.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SessionStateService {
   public _translate = true;
-  
-  get translate () {
+
+  get translate() {
     return this._translate;
   }
 

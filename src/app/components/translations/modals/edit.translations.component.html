@@ -1,7 +1,5 @@
-
-<h1 mat-dialog-title>{{data.isEdit ? 'Edit' : 'Create'}} Translation</h1>
+<h1 mat-dialog-title>{{ data.isEdit ? 'Edit' : 'Create' }} Translation</h1>
 <div mat-dialog-content>
-
   <app-selector
     *ngIf="!data.isEdit"
     key="locale"
@@ -9,56 +7,56 @@
     value="language"
     [model]="data.entity"
     placeholder="Choose a language ..."
-    [getItems]="service.languages.read({limit:-1})">
+    [getItems]="service.languages.read({ limit: -1 })"
+  >
   </app-selector>
 
-  <mat-form-field
-    *ngIf="canEditColumn('id')"
-    class="entity-edit-field">
+  <mat-form-field *ngIf="canEditColumn('id')" class="entity-edit-field">
     <input
       matInput
       type="text"
       placeholder="id ..."
       (change)="changed('id')"
       [(ngModel)]="data.entity.id"
-      autocomplete="off">
+      autocomplete="off"
+    />
   </mat-form-field>
- 
+
   <mat-form-field
     *ngIf="canEditColumn('content')"
     appearance="outline"
-    class="entity-edit-field entity-edit-field-full-width">
+    class="entity-edit-field entity-edit-field-full-width"
+  >
     <textarea
       matInput
       spellcheck="false"
       (change)="changed('content')"
       rows="10"
       [(ngModel)]="data.entity.content"
-      placeholder="Content ..."></textarea>
+      placeholder="Content ..."
+    ></textarea>
   </mat-form-field>
-
 </div>
 
 <div mat-dialog-actions>
-
   <div class="right-aligned">
-
     <mat-checkbox
       *ngIf="!data.isEdit"
       class="entity-edit-field"
       [(ngModel)]="sessionStateService.translate"
-      matTooltip="Translate item using Google Translate">Translate</mat-checkbox>
+      matTooltip="Translate item using Google Translate"
+      >Translate</mat-checkbox
+    >
 
-    <button 
+    <button
       mat-raised-button
       color="primary"
       [disabled]="!isValid()"
-      (click)="upsert()">Save</button>
+      (click)="upsert()"
+    >
+      Save
+    </button>
 
-    <button
-      mat-button
-      (click)="close(null)">Cancel</button>
-
+    <button mat-button (click)="close(null)">Cancel</button>
   </div>
-
 </div>

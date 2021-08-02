@@ -19,10 +19,9 @@ import { EditTranslationsComponent } from './modals/edit.translations.component'
 @Component({
   selector: 'app-translations',
   templateUrl: './translations.component.html',
-  styleUrls: ['./translations.component.scss']
+  styleUrls: ['./translations.component.scss'],
 })
 export class TranslationsComponent extends GridComponent implements OnInit {
-
   /**
    * All languages backend supports.
    */
@@ -36,11 +35,11 @@ export class TranslationsComponent extends GridComponent implements OnInit {
     'locale',
     'id',
     'content',
-    'delete-instance'
+    'delete-instance',
   ];
 
   // Need to view paginator as a child to update page index of it.
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   // Form control declarations to bind up with reactive form elements.
   public id: FormControl;
@@ -52,8 +51,9 @@ export class TranslationsComponent extends GridComponent implements OnInit {
     public authService: AuthService,
     protected snackBar: MatSnackBar,
     private httpService: HttpService,
-    private dialog: MatDialog) {
-      super(authService, snackBar);
+    private dialog: MatDialog
+  ) {
+    super(authService, snackBar);
   }
 
   /**
@@ -108,7 +108,6 @@ export class TranslationsComponent extends GridComponent implements OnInit {
    * and instantiates our FormControls.
    */
   public ngOnInit() {
-
     // Retrieves data from our backend, unfiltered, and binds our mat-table accordingly.
     this.getData();
 
@@ -124,28 +123,28 @@ export class TranslationsComponent extends GridComponent implements OnInit {
      * Retrieving all supported languages from backend to populate
      * locale filtering select drop down.
      */
-    this.httpService.languages.read({limit:-1}).subscribe((res) => {
-
+    this.httpService.languages.read({ limit: -1 }).subscribe((res) => {
       // Creating a default value for our filter.
       this.filter['locale.eq'] = null;
 
       // Assigning model to result from backend.
-      this.languages = [{locale: null, 'language': 'No filter ...'}].concat(res || []);
+      this.languages = [{ locale: null, language: 'No filter ...' }].concat(
+        res || []
+      );
     });
   }
 
   /**
    * Invoked when user wants to edit an entity
-   * 
+   *
    * This will show a modal dialog, allowing the user to edit his record.
    */
   public editEntity(entity: any) {
-
     const dialogRef = this.dialog.open(EditTranslationsComponent, {
       width: '800px',
-      data: this.getEditData(entity)
+      data: this.getEditData(entity),
     });
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.setEditData(res, entity);
       }
@@ -154,18 +153,18 @@ export class TranslationsComponent extends GridComponent implements OnInit {
 
   /**
    * Invoked when user wants to create a new entity
-   * 
+   *
    * This will show a modal dialog, allowing the user to supply
    * the initial data for the entity.
    */
   public createEntity() {
-
     const dialogRef = this.dialog.open(EditTranslationsComponent, {
       width: '800px',
       data: {
         isEdit: false,
         entity: {},
-      }});
+      },
+    });
     dialogRef.afterClosed().subscribe((res: any) => {
       if (res) {
         this.itemCreated(res);

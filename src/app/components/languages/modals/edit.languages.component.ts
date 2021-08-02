@@ -20,10 +20,9 @@ import languages from '../../../languages.json';
  */
 @Component({
   templateUrl: './edit.languages.component.html',
-  styleUrls: ['./edit.languages.component.scss']
+  styleUrls: ['./edit.languages.component.scss'],
 })
 export class EditLanguagesComponent extends DialogComponent implements OnInit {
-
   // Languages already defined in backend.
   private existingLanguages: any[] = [];
 
@@ -49,24 +48,18 @@ export class EditLanguagesComponent extends DialogComponent implements OnInit {
     public dialogRef: MatDialogRef<EditLanguagesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     protected snackBar: MatSnackBar,
-    private service: HttpService) {
+    private service: HttpService
+  ) {
     super(snackBar);
     this.primaryKeys = ['locale'];
-    this.createColumns = [
-      'locale',
-      'language'
-    ];
-    this.updateColumns = [
-      'locale',
-      'language'
-    ];
+    this.createColumns = ['locale', 'language'];
+    this.updateColumns = ['locale', 'language'];
   }
 
   /**
    * Implementation of OnInit.
    */
   public ngOnInit() {
-
     // Creating filter backends form control.
     this.languageControl = new FormControl();
     if (this.data.isEdit) {
@@ -76,32 +69,41 @@ export class EditLanguagesComponent extends DialogComponent implements OnInit {
     }
 
     // Making sure we trap value changes for language form control, to make entity field dirty.
-    this.languageControl.valueChanges.subscribe(res => {
+    this.languageControl.valueChanges.subscribe((res) => {
       this.changed('language');
     });
 
     // Retrieving currently existsing languages such that we can remove these as options.
-    this.service.languages.read({limit: -1}).subscribe(res => {
+    this.service.languages.read({ limit: -1 }).subscribe((res) => {
       this.existingLanguages = res || [];
     });
 
     // Creating our filter languages subscriber for our auto completer.
-    this.filteredLanguages = this.languageControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => 
+    this.filteredLanguages = this.languageControl.valueChanges.pipe(
+      startWith(''),
+      map(
+        (value) =>
           !this.data.isEdit &&
-          this.allLanguages.filter(x => this.existingLanguages.filter(y => y.locale === x.code).length === 0 &&
-          x.name.toLowerCase().includes(this.languageControl.value.toLowerCase()))));
+          this.allLanguages.filter(
+            (x: any) =>
+              this.existingLanguages.filter((y) => y.locale === x.code)
+                .length === 0 &&
+              x.name
+                .toLowerCase()
+                .includes(this.languageControl.value.toLowerCase())
+          )
+      )
+    );
   }
 
   /**
    * Invoked when user selects a language in the autocompleter.
    */
   public languageSelected() {
-
     // Changing the entity fields to the updated values.
-    this.data.entity.locale = this.allLanguages.filter(x => x.name === this.languageControl.value)[0].code;
+    this.data.entity.locale = this.allLanguages.filter(
+      (x: any) => x.name === this.languageControl.value
+    )[0].code;
     this.data.entity.language = this.languageControl.value;
 
     // Informing base component of that we've changed the relevant entity fields.
@@ -117,7 +119,7 @@ export class EditLanguagesComponent extends DialogComponent implements OnInit {
     this.data.entity.language = this.languageControl.value;
     return this.data;
   }
-  
+
   /**
    * Returns a reference to the update method, to update entity.
    */
@@ -133,7 +135,7 @@ export class EditLanguagesComponent extends DialogComponent implements OnInit {
 
   /**
    * Closes dialog.
-   * 
+   *
    * @param data Entity that was created or updated
    */
   public close(data: any) {

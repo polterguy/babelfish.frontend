@@ -1,53 +1,49 @@
-
-<h1 mat-dialog-title>{{data.isEdit ? 'Edit' : 'Create'}} Language</h1>
+<h1 mat-dialog-title>{{ data.isEdit ? 'Edit' : 'Create' }} Language</h1>
 <div mat-dialog-content>
-
   <mat-form-field
     *ngIf="canEditColumn('language')"
-    class="entity-edit-field entity-edit-field-full-width">
+    class="entity-edit-field entity-edit-field-full-width"
+  >
     <mat-label>Language</mat-label>
     <input
       type="text"
       placeholder="Language ..."
       matInput
       [formControl]="languageControl"
-      [matAutocomplete]="auto">
+      [matAutocomplete]="auto"
+    />
     <mat-autocomplete
       #auto="matAutocomplete"
-      (optionSelected)="languageSelected()">
-      <mat-option *ngFor="let idx of filteredLanguages | async" [value]="idx.name">
-        {{idx.name}}
+      (optionSelected)="languageSelected()"
+    >
+      <mat-option
+        *ngFor="let idx of filteredLanguages | async"
+        [value]="idx.name"
+      >
+        {{ idx.name }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
 
   <mat-form-field
     *ngIf="canEditColumn('locale')"
-    class="entity-edit-field entity-edit-field-full-width">
+    class="entity-edit-field entity-edit-field-full-width"
+  >
     <input
       matInput
       type="text"
       placeholder="locale"
       (change)="changed('locale')"
       [(ngModel)]="data.entity.locale"
-      autocomplete="off">
+      autocomplete="off"
+    />
   </mat-form-field>
-
 </div>
 
 <div mat-dialog-actions>
-
   <div class="right-aligned">
+    <button mat-raised-button color="primary" (click)="upsert()">Save</button>
 
-    <button 
-      mat-raised-button
-      color="primary"
-      (click)="upsert()">Save</button>
-
-    <button
-      mat-button
-      (click)="close(null)">Cancel</button>
-
+    <button mat-button (click)="close(null)">Cancel</button>
   </div>
-
 </div>

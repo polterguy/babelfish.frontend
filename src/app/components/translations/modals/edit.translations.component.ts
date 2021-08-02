@@ -15,10 +15,12 @@ import { SessionStateService } from 'src/app/services/session-state-service';
  */
 @Component({
   templateUrl: './edit.translations.component.html',
-  styleUrls: ['./edit.translations.component.scss']
+  styleUrls: ['./edit.translations.component.scss'],
 })
-export class EditTranslationsComponent extends DialogComponent implements OnInit {
-
+export class EditTranslationsComponent
+  extends DialogComponent
+  implements OnInit
+{
   /**
    * Constructor taking a bunch of services injected using dependency injection.
    */
@@ -27,33 +29,25 @@ export class EditTranslationsComponent extends DialogComponent implements OnInit
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public sessionStateService: SessionStateService,
     protected snackBar: MatSnackBar,
-    public service: HttpService) {
+    public service: HttpService
+  ) {
     super(snackBar);
     this.primaryKeys = ['id', 'locale'];
-    this.createColumns = [
-      'id',
-      'locale',
-      'content'
-    ];
-    this.updateColumns = [
-      'id',
-      'locale',
-      'content'
-    ];
+    this.createColumns = ['id', 'locale', 'content'];
+    this.updateColumns = ['id', 'locale', 'content'];
   }
 
   /**
    * Implementation of OnInit.
    */
   ngOnInit() {
-
     // Defaulting language to English if English exists in database.
     if (!this.data.isEdit) {
-      this.service.languages.read({limit:-1}).subscribe(res => {
-        if (res.filter(x => x.locale === 'en')) {
+      this.service.languages.read({ limit: -1 }).subscribe((res) => {
+        if (res.filter((x) => x.locale === 'en')) {
           this.data.entity['locale'] = 'en';
         }
-      })
+      });
     }
   }
 
@@ -64,7 +58,7 @@ export class EditTranslationsComponent extends DialogComponent implements OnInit
   protected getData() {
     return this.data;
   }
-  
+
   /**
    * Returns a reference to the update method, to update entity.
    */
@@ -76,7 +70,6 @@ export class EditTranslationsComponent extends DialogComponent implements OnInit
    * Returns a reference to the create method, to create new entities.
    */
   protected getCreateMethod() {
-
     // This is a bit naive, but actually works.
     this.data.entity.translate = this.sessionStateService.translate;
     return this.service.translations.create(this.data.entity);
@@ -84,7 +77,7 @@ export class EditTranslationsComponent extends DialogComponent implements OnInit
 
   /**
    * Closes dialog.
-   * 
+   *
    * @param data Entity that was created or updated
    */
   public close(data: any) {
@@ -99,6 +92,11 @@ export class EditTranslationsComponent extends DialogComponent implements OnInit
    * Returns true it entity is valid and can be saved.
    */
   public isValid() {
-    return this.data.isEdit || (this.data.entity.locale && this.data.entity.id && this.data.entity.content);
+    return (
+      this.data.isEdit ||
+      (this.data.entity.locale &&
+        this.data.entity.id &&
+        this.data.entity.content)
+    );
   }
 }
