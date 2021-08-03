@@ -32,8 +32,8 @@ export class TranslationsComponent extends GridComponent implements OnInit {
    * Notice! 'delete-instance' should always come last.
    */
   public displayedColumns: string[] = [
-    'locale',
     'id',
+    'locale',
     'content',
     'delete-instance',
   ];
