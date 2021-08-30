@@ -45,13 +45,11 @@
           <mat-form-field
             *ngIf="languages.length > 0"
             appearance="outline"
-            class="fill-width filter-select"
-          >
+            class="fill-width filter-select">
             <mat-select
               [(ngModel)]="filter['locale.eq']"
               (selectionChange)="getData()"
-              placeholder="Filter by language ..."
-            >
+              placeholder="Filter by language ...">
               <mat-option *ngFor="let idx of languages" [value]="idx.locale">{{
                 idx.language + (!idx.locale ? '' : ' - [' + idx.locale + ']')
               }}</mat-option>
