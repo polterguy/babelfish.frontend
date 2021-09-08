@@ -44,16 +44,13 @@
       *ngIf="!data.isEdit"
       class="entity-edit-field"
       [(ngModel)]="sessionStateService.translate"
-      matTooltip="Translate item using Google Translate"
-      >Translate</mat-checkbox
-    >
+      matTooltip="Translate item using Google Translate">Translate</mat-checkbox>
 
     <button
       mat-raised-button
       color="primary"
       [disabled]="!isValid()"
-      (click)="upsert()"
-    >
+      (click)="upsert()">
       Save
     </button>
 
